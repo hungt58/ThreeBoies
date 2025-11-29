@@ -1,0 +1,25 @@
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Blog {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String   @db.LongText  // ← dùng LongText để lưu HTML lớn, bảng, hình ảnh
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model User{
+  id      Int     @id @default(autoincrement())
+  lastName String
+  firstName String
+}
