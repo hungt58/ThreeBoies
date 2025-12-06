@@ -3,8 +3,7 @@ const prisma = new PrismaClient();
 
 export const getAllBlogs = async (req, res, next) => {
   try {
-    const { page = 1, pageSize = 6 , topic } = req.query;
-
+    const { page = 1, pageSize = 6 , topic } = req.body;
     const pageNumber = parseInt(page);
     const pageSizeNumber = parseInt(pageSize);
 
