@@ -19,7 +19,8 @@ model Post {
   fontSize  String   @default("16px")
   thumbnail String?
   pinned    Boolean  @default(false)
-  topic     Topic    @default(TECHNOLOGY)
+  topic     Topic    @default(kien_thuc)
+
 
   @@index([slug])
   @@index([pinned])
@@ -27,9 +28,7 @@ model Post {
 }
 
 enum Topic {
-  cong-nghe
-  suc-khoe
-  LIFESTY
-  EDUCATION
-  ENTERTAINMENT
+  kien_thuc
+  thong_tin
+  thu_tuc
 }
