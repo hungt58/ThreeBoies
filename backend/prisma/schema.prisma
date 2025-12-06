@@ -27,9 +27,9 @@ model Post {
 }
 
 enum Topic {
-  TECHNOLOGY
-  HEALTH
-  LIFESTYLE
+  cong-nghe
+  suc-khoe
+  LIFESTY
   EDUCATION
   ENTERTAINMENT
 }

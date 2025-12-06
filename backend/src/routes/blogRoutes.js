@@ -8,7 +8,7 @@ const router = express.Router();
  
 
 // Lấy danh sách blog với pagination (page + pageSize trong body)
-router.post("/getallblog", validate(getAllBlogsSchema), getAllBlogs);
+router.get("/getallblog", validate(getAllBlogsSchema), getAllBlogs);
 router.get('/:slug', getBlogDetail);
 
 export default router;
