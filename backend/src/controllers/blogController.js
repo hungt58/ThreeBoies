@@ -3,37 +3,52 @@ const prisma = new PrismaClient();
 
 export const getAllBlogs = async (req, res, next) => {
   try {
-    const { page = 1, pageSize = 10 } = req.body;
+    const { page = 1, pageSize = 6 , topic } = req.query;
 
     const pageNumber = parseInt(page);
     const pageSizeNumber = parseInt(pageSize);
 
+    const where = {};
+
+    if (topic) {
+      where.topic = topic;  // lọc theo topic
+    }
+
     const blogs = await prisma.post.findMany({
       skip: (pageNumber - 1) * pageSizeNumber,
       take: pageSizeNumber,
-      orderBy: { date: 'desc' },
+      orderBy: [
+        { pinned: 'desc' },
+        { date: 'desc' }
+      ],
+      where,
       select: {
         id: true,
         title: true,
         slug: true,
         excerpt: true,
-        date: true
+        date: true,
+        pinned: true,
+        topic: true
       }
     });
 
-    const total = await prisma.post.count();
+    const total = await prisma.post.count({ where });
     const totalPage = Math.ceil(total / pageSizeNumber);
 
     res.json({
       page: pageNumber,
       pageSize: pageSizeNumber,
       totalPage,
+      topic: topic || null,
       data: blogs
     });
   } catch (err) {
     next(err);
   }
 };
+
+
 export const getBlogDetail = async (req, res, next) => {
   try {
     const { slug } = req.params;
@@ -50,6 +65,7 @@ export const getBlogDetail = async (req, res, next) => {
         excerpt: true,
         content: true,
         date: true,
+        pinned : true
       }
     });
 

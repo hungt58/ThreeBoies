@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,20 +6,30 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
- 
-
 
 model Post {
-  id        String     @id @default(cuid())
+  id        String   @id @default(cuid())
   title     String
-  slug      String     @unique
+  slug      String   @unique
   excerpt   String
   content   String
-  fontSize  String     @default("16px")
-  date      DateTime   @default(now())
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  date      DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  fontSize  String   @default("16px")
+  thumbnail String?
+  pinned    Boolean  @default(false)
+  topic     Topic    @default(TECHNOLOGY)
 
-  @@map("post")
   @@index([slug])
+  @@index([pinned])
+  @@map("post")
+}
+
+enum Topic {
+  TECHNOLOGY
+  HEALTH
+  LIFESTYLE
+  EDUCATION
+  ENTERTAINMENT
 }
