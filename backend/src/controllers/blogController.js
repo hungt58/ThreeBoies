@@ -76,7 +76,8 @@ export const getBlogDetail = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};export const getBlogsHome = async (req, res, next) => {
+}
+export const getBlogsHome = async (req, res, next) => {
   try {
     const baseSelect = {
       id: true,
@@ -88,41 +89,42 @@ export const getBlogDetail = async (req, res, next) => {
       topic: true
     };
 
+  
     const pinnedBlogs = await prisma.post.findMany({
-      orderBy: [
-        { pinned: "desc" },
-        { date: "desc" }
-      ],
+      where: { pinned: true },
+      orderBy: [{ date: "desc" }],
       take: 3,
       select: baseSelect
     });
 
-    const kien_thucBlogs = await prisma.post.findMany({
+
+    const knowledgeBlogs = await prisma.post.findMany({
       where: { topic: "kien_thuc" },
-      orderBy: { date: "desc" },
+      orderBy: [{ date: "desc" }],
       take: 6,
       select: baseSelect
     });
 
-    const thu_tucBlogs = await prisma.post.findMany({
+    const procedureBlogs = await prisma.post.findMany({
       where: { topic: "thu_tuc" },
-      orderBy: { date: "desc" },
+      orderBy: [{ date: "desc" }],
       take: 6,
       select: baseSelect
     });
 
-    const thong_tinBlogs = await prisma.post.findMany({
+
+    const informationBlogs = await prisma.post.findMany({
       where: { topic: "thong_tin" },
-      orderBy: { date: "desc" },
+      orderBy: [{ date: "desc" }],
       take: 6,
       select: baseSelect
     });
 
     res.json({
       pinnedBlogs,
-      kien_thucBlogs,
-      thu_tucBlogs,
-      thong_tinBlogs
+      knowledgeBlogs,
+      procedureBlogs,
+      informationBlogs
     });
 
   } catch (err) {
