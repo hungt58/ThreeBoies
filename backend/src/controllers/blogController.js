@@ -26,6 +26,7 @@ export const getAllBlogs = async (req, res, next) => {
         title: true,
         slug: true,
         excerpt: true,
+        thumbnail : true,
         date: true,
         pinned: true,
         topic: true
@@ -62,6 +63,7 @@ export const getBlogDetail = async (req, res, next) => {
         title: true,
         slug: true,
         excerpt: true,
+        thumbnail : true,
         content: true,
         date: true,
         pinned : true,
@@ -85,6 +87,7 @@ export const getBlogsHome = async (req, res, next) => {
       title: true,
       slug: true,
       excerpt: true,
+      thumbnail : true,
       date: true,
       pinned: true,
       topic: true
