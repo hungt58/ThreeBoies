@@ -64,7 +64,8 @@ export const getBlogDetail = async (req, res, next) => {
         excerpt: true,
         content: true,
         date: true,
-        pinned : true
+        pinned : true,
+        relatedArticles: true
       }
     });
 

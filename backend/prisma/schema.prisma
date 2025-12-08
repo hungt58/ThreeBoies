@@ -8,19 +8,19 @@ datasource db {
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  title     String
-  slug      String   @unique
-  excerpt   String
-  content   String
-  date      DateTime @default(now())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  fontSize  String   @default("16px")
-  thumbnail String?
-  pinned    Boolean  @default(false)
-  topic     Topic    @default(kien_thuc)
-
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  excerpt         String
+  content         String
+  date            DateTime @default(now())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  fontSize        String   @default("16px")
+  thumbnail       String?
+  pinned          Boolean  @default(false)
+  topic           Topic?
+  relatedArticles Json?
 
   @@index([slug])
   @@index([pinned])
